@@ -1,0 +1,199 @@
+.search {
+  margin-left: 20% !important;
+}
+
+.me-5 {
+  margin-left: 50%;
+}
+
+.time {
+  margin-left: 85%;
+}
+
+.product-category {
+  text-transform: capitalize;
+}
+
+/* -----------------------------------------Product.js---------------------------------------- */
+
+li {
+  list-style-type: none;
+}
+
+.image-detail {
+  width: 90%;
+  /* height: 50vh !important; */
+  margin-top: 1%;
+  margin-left: 9%;
+  column-count: 4;
+  column-gap: 20px;
+}
+
+.image {
+  width: 45px;
+  margin-left: 9% !important;
+}
+
+.proudct-quantity {
+  align-items: center;
+  margin-top: 8%;
+}
+
+.Orderbutton {
+  background-color: #fb641b !important;
+  color: white !important;
+}
+
+/* -----------------------------------slider------------------------------------- */
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-slider {
+  margin-top: 0%;
+  height: 400px !important;
+  object-fit: none;
+}
+
+/* ------------------------------------darkmode------------------------------------- */
+
+.dark {
+  background-color: #333;
+  color: white;
+}
+
+.dark .card {
+  background-color: #444;
+  color: white;
+}
+
+.light {
+  background-color: white;
+  color: black;
+}
+
+.light .card {
+  background-color: #f5f5f5;
+  color: black;
+}
+
+/* ------------------------------------Scrollbar-------------------------------- */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #050303;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #bd0606;
+}
+
+/* --------------------------------------image-ordered----------------------------------------- */
+.image-ordered {
+  display: grid;
+  grid-column: 3 !important;
+  width: 200px;
+  height: 40vh !important;
+}
+
+/* ------------------------------------loader---------------------------------------- */
+.CirularProgress {
+  margin-left: 200% !important;
+}
+
+/* ------------------------ordered page----------------------- */
+
+.Ordered-image {
+  width: 30%;
+  height: auto;
+  align-items: center;
+  margin-left: 10%;
+}
+
+.orderpage {
+  width: 90%;
+  margin-top: 1%;
+  margin-left: 9%;
+  column-count: 3;
+  column-gap: 20px;
+  padding-right: 10px;
+  padding: 1;
+  margin: 1;
+}
+
+/* --------------------cartpage.js----------------------------- */
+
+.cartItemimage {
+  width: 100px;
+}
+
+.cartdetails {
+  column-count: 2;
+  column-gap: 20px;
+  /* padding-right: 10px;
+  padding: 1;
+  margin: 1; */
+}
+
+.btn-price-quantity {
+  margin-left: 30%;
+}
+
+.cartItemimage {
+  margin-left: 35%;
+}
+
+/* ------------------------Dashboard------------------------------- */
+.image-details {
+  width: 90%;
+  height: 50vh !important;
+  margin-top: 1%;
+  margin-left: 9%;
+  column-count: 4;
+  column-gap: 20px;
+}
+
+/* --------------------------------nullcheck-------------------------- */
+.cartimg{
+  width: 200px;
+  margin-top: 12%;
+}
+
+.orderimg{
+  margin-left: 20%;
+}
+
+.ordercard{
+ margin-top: 50%;
+ margin-left: 150%;
+}
+
+.yourorder{
+  margin-top: 30% !important;
+}

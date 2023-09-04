@@ -1,0 +1,45 @@
+.form{
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 9%;
+    margin-left: 38%;
+    width: 20%;
+    height: 350px;
+}
+
+label{
+    margin-right: 15%;
+}
+
+.email{
+    margin-top: 12%;
+}
+
+.email-input{
+    width: 50%;
+}
+
+.password{
+    margin-top: 18%;
+}
+
+.password-input{
+    margin-left: -6% !important;
+    width: 50%;
+}
+
+.submit{
+    margin-top: 18%;
+    margin-left: 22%;
+}
+
+.login{
+    margin-left: 40%;
+}
+
+.error{
+    margin-left: 30%;
+}
+
+
+
