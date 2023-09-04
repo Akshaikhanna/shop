@@ -67,9 +67,9 @@ function Product() {
 
   // -----------------Add to cart function store the data to localstorage and alert message using toastify---------------
   const addToCart = (product) => {
-    const updatedCart = [...cartItem, product]; //creates a new array using spread operator
-    setCartItem([...cartItem, product]); //update the state to the component
-    localStorage.setItem("cart", JSON.stringify(updatedCart)); //store the updated value in browser localstorage
+    const updatedCart = [...cartItem, product];
+    setCartItem([...cartItem, product]);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
 
     toast.success("Successfully Added", {
       position: toast.POSITION.TOP_CENTER,
@@ -96,10 +96,10 @@ function Product() {
     // set a new argument
     const updatedProducts = products.map(
       (
-        product //Create a new array and map the existing product
+        product 
       ) =>
-        product.id === productId //check the current product and equals to object productId
-          ? { ...product, quantity: product.quantity + 1 } //condition is true. create a new object iusing spread operator
+        product.id === productId
+          ? { ...product, quantity: product.quantity + 1 } 
           : product
     );
     setProducts(updatedProducts);
