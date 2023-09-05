@@ -170,7 +170,7 @@ function CartPage({ addToCart, order }) {
             </Card>
           ))
         ) : (
-          <Card sx={{width:"300px"}}>
+          <Card sx={{width:"300px"}} className="card">
             <CardContent>
               <Typography>
                 <img src={cart} alt="img" className="cartimg" />

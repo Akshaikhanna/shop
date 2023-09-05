@@ -28,32 +28,79 @@ function Product() {
   const [loading, setLoading] = useState(true);
 
   //  -----------------------fetch the data from the API------------------------
+  // useEffect(() => {
+  //   const response = fetch("https://fakestoreapi.com/products")     // https://fakestoreapi.com/products
+  //   if(!response.ok){
+  //     throw new Error("error")
+  //   }
+  //     .then((response) => response.json()) //assumed to json format
+  //     .then((data) => {
+  //       const proudctWithQuantity = data.map((product) => ({
+  //         ...product,
+  //         quantity: 1,
+  //       }));
+  //       // setProducts(data);
+  //       setProducts(proudctWithQuantity);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching products", error);
+  //       setLoading(false);
+  //     });
+  // });
+
+  // ------------------------promise resolve and reject--------------------
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      // https://fakestoreapi.com/products
-      .then((response) => response.json()) //assumed to json format
-      .then((data) => {
-        const proudctWithQuantity = data.map((product) => ({
-          ...product,
-          quantity: 1,
-        }));
-        // setProducts(data);
-        setProducts(proudctWithQuantity);
-        setLoading(false);
+    const fetchdata = () => {
+      return new Promise((resolve, reject) => {
+        //promise is created resolve(success) and reject(error)
+        fetch("https://fakestoreapi.com/products")
+          .then((response) => {
+            if (!response.ok) {
+              //if response is false print the error message, response.ok is success
+              reject(Error("Something went wrong")); //if response is rejected new error is printed
+            }
+            return response.json(); //if response is success, parse the response body as json and return the promise
+          })
+          .then((data) => {
+            const proudctWithQuantity = data.map((product) => ({
+              ...product,
+              quantity: 1,
+            }));
+            setProducts(proudctWithQuantity);
+            setLoading(false);
+            resolve(); //successful
+          })
+          .catch((error) => {
+            console.log("Error", error);
+            setLoading(false);
+            reject(error);
+          });
+      });
+    };
+
+    // promise chain .then
+    fetchdata()
+      .then(() => {
+        toast.success("Success",{
+          position:toast.POSITION.TOP_CENTER,
+          autoClose:1000,
+          theme:'dark'
+        });
       })
       .catch((error) => {
-        console.error("Error fetching products", error);
-        setLoading(false);
+        console.log("Error", error);
       });
-  });
+  }, []);
+  // run the component that initially mounted
 
   // -------------------get the data form localstorage-----------------------
   useEffect(() => {
     const savedcart = localStorage.getItem("cart");
     if (savedcart) {
-      setCartItem(JSON.parse(savedcart)); //update the value 
+      setCartItem(JSON.parse(savedcart)); //update the value
     }
-    console.log(savedcart);
+    // console.log(savedcart);
   }, []);
   // --------------------Dark mode-------------------------------------------
   const toggleDarkMode = () => {
@@ -94,13 +141,10 @@ function Product() {
   // -------------------increase the quantity of the product-------------------------------
   const increaseQuantity = (productId) => {
     // set a new argument
-    const updatedProducts = products.map(
-      (
-        product 
-      ) =>
-        product.id === productId
-          ? { ...product, quantity: product.quantity + 1 } 
-          : product
+    const updatedProducts = products.map((product) =>
+      product.id === productId
+        ? { ...product, quantity: product.quantity + 1 }
+        : product
     );
     setProducts(updatedProducts);
   };
@@ -218,3 +262,26 @@ function Product() {
 }
 
 export default Product;
+
+//-------------------------- try and catch-------------------------------
+// useEffect(() => {
+//   const fetchdata = async () => {
+//     try {
+//       const response = await fetch("https://fakestoreapi.com/products");
+//       if (!response.ok) {
+//         throw new Error("Something went wrong");
+//       }
+//       const data = await response.json();
+//       const proudctWithQuantity = data.map((product) => ({
+//         ...product,
+//         quantity: 1,
+//       }));
+//       setProducts(proudctWithQuantity);
+//       setLoading(false);
+//     } catch (error) {
+//       console.log("Error data", error);
+//       setLoading(false);
+//     }
+//   };
+//   fetchdata();
+// }, []);
