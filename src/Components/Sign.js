@@ -1,68 +1,118 @@
 import React from "react";
-import "../Styles/Sign.css";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { Button } from "react-bootstrap";
+import { useFormik } from "formik";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+// import { Card } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import { EMAIL_REGEX, ERROR_MESSAGE } from "./Error";
 
-const validationSchema = Yup.object({
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: Yup.string()
-    .min(6, "Password must be at least 6 characters")
-    .matches(/[A-Z]/, "Password should contain atleast one Uppercase")
-    .required("Required"),
-});
+const StyledCard = styled(Grid)`
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+`;
 
-const initialValues = {
-  email: "",
-  password: "",
+const StyledForm = styled("form")`
+  width: 100%;
+`;
+
+const StyledButton = styled(Button)`
+  margin-top: 16px;
+`;
+
+// validation for email and password, store the error message in empty object.
+const validate = (values) => {
+  const errors = {};
+
+  if (!values.email) {
+    errors.email = ERROR_MESSAGE.EMAIL_REQUIRED;
+  } else if (!EMAIL_REGEX.test(values.email)) {
+    errors.email = ERROR_MESSAGE.INVALID_EMAIL;
+  } else if (values.email.length > 30) {
+    errors.email = ERROR_MESSAGE.LONG_EMAIL;
+  }
+
+  if (!values.password) {
+    errors.password = ERROR_MESSAGE.PASSWORD_REQUIRED;
+  } else if (values.password.length < 8) {
+    errors.password = ERROR_MESSAGE.INVALID_PASSWORD;
+  }
+
+  return errors;
 };
 
 const Sign = () => {
   const nav = useNavigate();
-  const handleSubmit = (values) => {
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+
+  const onSubmit = (values) => {
     console.log(values);
     nav("/product");
   };
 
-  return (
-    <div>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        <Form className="form">
-          <h3 className="login">Login</h3>
-          <div className="email">
-            <label htmlFor="email">Email</label>
-            <Field
-              type="email"
-              id="email"
-              name="email"
-              className="email-input"
-            />
-            <ErrorMessage name="email" component="div" className="error" />
-          </div>
+  // Applied custom validation
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validate,
+  });
 
-          <div className="password">
-            <label htmlFor="password">Password</label>
-            <Field
-              type="password"
-              id="password"
-              name="password"
-              className="password-input"
-            />
-            <ErrorMessage name="password" component="div" className="error" />
-          </div>
-          <div className="submit">
-            <Button type="submit" className="mx-5">
-              Submit
-            </Button>
-          </div>
-        </Form>
-      </Formik>
-    </div>
+  return (
+    <Container
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+      }}
+    >
+      <StyledCard>
+        <Typography variant="h4" gutterBottom>
+          Login
+        </Typography>
+        <StyledForm onSubmit={formik.handleSubmit}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sx={{mt: 5}}>
+              <TextField
+                id="email"
+                name="email"
+                label="Email"
+                variant="outlined"
+                fullWidth
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                helperText={formik.touched.email && formik.errors.email}
+                inputProps={{ maxLength: 30 }} // Set max length to 30 characters
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="password"
+                name="password"
+                label="Password"
+                variant="outlined"
+                fullWidth
+                type="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                helperText={formik.touched.password && formik.errors.password}
+                inputProps={{ maxLength: 8 }} // Set max length to 8 characters
+              />
+            </Grid>
+          </Grid>
+          <StyledButton type="submit" variant="contained" color="primary">
+            Submit
+          </StyledButton>
+        </StyledForm>
+      </StyledCard>
+    </Container>
   );
 };
 

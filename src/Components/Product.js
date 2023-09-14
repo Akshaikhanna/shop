@@ -119,7 +119,7 @@ function Product() {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
 
     toast.success("Successfully Added", {
-      position: toast.POSITION.TOP_CENTER,
+      position: toast.POSITION.BOTTOM_CENTER,
       autoClose: 1000,
       theme: "dark",
     });

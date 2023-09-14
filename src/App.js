@@ -6,6 +6,7 @@ import Product from "./Components/Product";
 import Item from "./Components/Item";
 import CartPage from "./Components/CartPage";
 import Ordered from "./Components/Ordered";
+import Effect from "./Components/Effect";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/item" element={<Item />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/order" element={<Ordered />} />
+        <Route path="/effect" element={<Effect/>}/>
       </Routes>
     </div>
   );
